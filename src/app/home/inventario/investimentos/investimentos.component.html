@@ -1,0 +1,73 @@
+<spo-investimento-filtro></spo-investimento-filtro>
+<div id="valores">
+    <spo-previsto-card></spo-previsto-card>
+    <spo-homologado-card></spo-homologado-card>
+    <spo-autorizado-card></spo-autorizado-card>
+    <spo-disponivel-card></spo-disponivel-card>
+</div>
+<div id="cabecalho">
+    <div id="title">
+        <p>Investimentos ({{data.length}})</p>
+        <div id="pesquisa">
+            <img src="assets/img/search.svg" width="20px" />
+            <input type="text" [formControl]="txtBusca" placeholder="Procurar" />
+        </div>
+    </div>
+    <div id="acoes">
+        <div id="objetos" class="botaoAcao">
+            <img src="assets/img/hammer.svg" width="20px">
+            <div *ngIf="qtObjetos > 0">{{qtObjetos}}</div>
+        </div>
+        <div (click)="selectedDisplay = CLASS_DISPLAYGRADE" id="display-grade" class="botaoAcao {{selectedDisplay === CLASS_DISPLAYGRADE ? 'ativo' : ''}}">
+            <img src="assets/img/grid-layout{{selectedDisplay === CLASS_DISPLAYGRADE ? '-branco' : ''}}.svg" width="20px">
+        </div>
+        <div (click)="selectedDisplay = CLASS_DISPLAYLISTA" id="display-lista" class="botaoAcao {{selectedDisplay === CLASS_DISPLAYLISTA ? 'ativo' : ''}}">
+            <img src="assets/img/align-left{{selectedDisplay === CLASS_DISPLAYLISTA ? '-branco' : ''}}.svg" width="20px">
+        </div>
+    </div>
+</div>
+<div id="listaDados" [class]="selectedDisplay">
+    <div *ngFor="let inv of data">
+        <div id="uniImg" class="listNone">
+            <img src="https://placehold.co/50" /> 
+        </div>
+        <div class="col seta gridNone"><img src="assets/img/arrow-right.svg" width="20px"></div>
+        <div class="col name">
+            <div id="invTxt" class="gridNone">Investimento</div>
+            <div id="invName">{{inv.nome}}</div>
+        </div>
+        <div class="col">
+            <div id="uniTxt" class="gridNone">Unidade</div>
+            <div id="invUnidade">{{inv.unidade}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Plano Orçamentário</div>
+            <div>{{inv.planoOrcamentario}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Previsto</div>
+            <div>{{inv.previsto | customCurrency}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Homologado</div>
+            <div>{{inv.homologado | customCurrency}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Autorizado</div>
+            <div>{{inv.autorizado | customCurrency}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Disponível</div>
+            <div>{{inv.disponivel | customCurrency}}</div>
+        </div>
+        <div class="col opcoes gridNone">
+            <span>...</span>
+        </div>
+        <div id="descricao" class="listNone">
+            <p>{{inv.descricao}}</p>
+        </div>
+        <div id="areaTemativa" class="listNone">
+            <p>{{inv.areaTematica}}</p>
+        </div>
+    </div>
+</div>

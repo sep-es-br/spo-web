@@ -1,0 +1,63 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 2rem);
+    width: 5rem;
+    background-color: var(--cor-primaria);
+    padding: 1rem;
+    box-shadow: 0.2rem 0px 6px 0px gray;
+
+    div#nav {
+        padding-top: 5rem;
+        flex-grow: 1;
+        color: white;
+    }
+
+    .menuItem {
+        position: relative;
+        padding: 1rem;
+        cursor: pointer;
+
+        .subMenu {
+            padding-left: 0;
+            padding-right: 0;
+            width: 20rem;
+            display: none;
+            background-color: white;
+            color: var(--cor-primaria);
+            font-family: "Open Sans Bold", "Open Sans", sans-serif;
+            position: absolute;
+            left: 5rem;
+            top: -0.5rem;
+            border-radius: 1rem;
+            box-shadow: 0.3rem 0.3rem 6px gray;
+        
+            > p {
+                font-weight: bold;
+                padding-left: 1.5rem;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+        
+            div {
+                padding-left: 1.5rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+
+                ul {
+                    margin-left: 1rem;
+                }
+            }
+
+            div:hover {
+                background-color: rgba(79, 129, 189, 1);
+                color: white;
+            }
+        }
+    }
+    
+    .showDiv {
+        display: block !important;
+    }
+}
+

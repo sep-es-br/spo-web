@@ -1,0 +1,29 @@
+:host {
+    display: flex;
+    flex-direction: row;
+}
+
+:host div#icone {
+    background-color: rgb(1, 191, 115);
+    padding: 10px;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    box-shadow: 0 0 3px;
+}
+
+:host div#infos {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+:host div#infos div {
+    flex-grow: 1;
+}
+
+:host div#infos div#value {
+    text-align: end;
+}
