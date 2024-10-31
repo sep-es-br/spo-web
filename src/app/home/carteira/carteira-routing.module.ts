@@ -5,16 +5,10 @@ import { NgModule } from "@angular/core";
 const routes : Route[] = [
     {
         path: "investimentos",
-        component: EmConstrucaoComponent,
-        data: {
-            name: 'Investimentos'
-        }
+        component: EmConstrucaoComponent
     },{
         path: "objetos",
-        component: EmConstrucaoComponent,
-        data: {
-            name: 'Objetos'
-        }
+        component: EmConstrucaoComponent
     },{
         path: "",
         pathMatch: "full",

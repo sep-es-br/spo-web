@@ -15,7 +15,7 @@ export class BreadCrumbComponent {
     breadcrumb_data : {
         pathName: string,
         pathLink: () => string
-    }[]
+    }[] = []
     breadCrumNames  = breadCrumbNames;
 
 
@@ -24,7 +24,7 @@ export class BreadCrumbComponent {
             if (event instanceof NavigationEnd) {
                 let activeRouter = this.route.snapshot;
                 while (activeRouter.children.length > 0) {
-                    activeRouter = activeRouter.firstChild;
+                    activeRouter = activeRouter.firstChild ? activeRouter.firstChild : activeRouter;;
                 }
 
                 let fullPath = activeRouter.pathFromRoot

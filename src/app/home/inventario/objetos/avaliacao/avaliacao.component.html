@@ -1,0 +1,63 @@
+<spo-objeto-filtro></spo-objeto-filtro>
+<div id="cabecalho">
+    <div id="title">
+        <p>Objetos ({{qtObjetos()}})</p>
+        <div id="pesquisa">
+            <img src="assets/img/search.svg" width="20px" />
+            <input type="text" [formControl]="txtBusca" placeholder="Procurar" />
+        </div>
+    </div>
+</div>
+<div id="listaDados" class="displayLista">
+    <div *ngFor="let inv of data[paginaAtual-1]">
+        <div class="col seta gridNone"><img src="assets/img/arrow-right.svg" width="20px"></div>
+        <div class="col name">
+            <div id="invTxt" class="gridNone">Objeto</div>
+            <div id="invName">{{inv.nome}}</div>
+        </div>
+        <div class="col">
+            <div id="uniTxt" class="gridNone">  Tipo</div>
+            <div id="invUnidade">{{inv.tipo}}</div>
+        </div>
+        <div class="col">
+            <div id="uniTxt" class="gridNone">Unidade</div>
+            <div id="invUnidade">{{inv.unidade}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Previsto</div>
+            <div>{{inv.previsto | customCurrency}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Homologado</div>
+            <div>{{inv.homologado | customCurrency}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Autorizado</div>
+            <div>{{inv.autorizado | customCurrency}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Empenhado</div>
+            <div>{{inv.empenhado | customCurrency}}</div>
+        </div>
+        <div class="col gridNone">
+            <div>Status</div>
+            <div>{{inv.status}}</div>
+        </div>
+        <div class="col opcoes gridNone">
+            <span>...</span>
+        </div>
+    </div> 
+</div>
+<div id="paginacao">
+    <div id="btnAcao" class="btnPagina {{paginaAtual === 1 ? 'btnPgInativo' : ''}}"
+        (click)="voltaUmaPagina()">
+        <p><</p>
+    </div>
+    <div class="btnPagina {{i + 1 === paginaAtual ? 'pgAtual' : ''}}" *ngFor="let x of data; index as i" (click)="paginaAtual = i + 1">
+        <p>{{i+1}}</p>
+    </div>
+    <div id="btnAcao" class="btnPagina {{paginaAtual === data.length ? 'btnPgInativo' : ''}}"
+        (click)="avancarUmaPagina()">
+        <p>></p>
+    </div>
+</div>

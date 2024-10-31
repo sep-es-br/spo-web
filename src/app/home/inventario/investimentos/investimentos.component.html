@@ -7,14 +7,15 @@
 </div>
 <div id="cabecalho">
     <div id="title">
-        <p>Investimentos ({{data.length}})</p>
+        <p>Investimentos ({{qtInvestimento()}})</p>
         <div id="pesquisa">
             <img src="assets/img/search.svg" width="20px" />
             <input type="text" [formControl]="txtBusca" placeholder="Procurar" />
         </div>
     </div>
     <div id="acoes">
-        <div id="objetos" class="botaoAcao">
+        <div id="objetos" class="botaoAcao"
+            routerLink="/home/inventario/objetos/avaliacao">
             <img src="assets/img/hammer.svg" width="20px">
             <div *ngIf="qtObjetos > 0">{{qtObjetos}}</div>
         </div>
@@ -27,7 +28,7 @@
     </div>
 </div>
 <div id="listaDados" [class]="selectedDisplay">
-    <div *ngFor="let inv of data">
+    <div *ngFor="let inv of data[paginaAtual-1]">
         <div id="uniImg" class="listNone">
             <img src="https://placehold.co/50" /> 
         </div>
@@ -69,5 +70,18 @@
         <div id="areaTemativa" class="listNone">
             <p>{{inv.areaTematica}}</p>
         </div>
+    </div> 
+</div>
+<div id="paginacao">
+    <div id="btnAcao" class="btnPagina {{paginaAtual === 1 ? 'btnPgInativo' : ''}}"
+        (click)="voltaUmaPagina()">
+        <p><</p>
+    </div>
+    <div class="btnPagina {{i + 1 === paginaAtual ? 'pgAtual' : ''}}" *ngFor="let x of data; index as i" (click)="paginaAtual = i + 1">
+        <p>{{i+1}}</p>
+    </div>
+    <div id="btnAcao" class="btnPagina {{paginaAtual === data.length ? 'btnPgInativo' : ''}}"
+        (click)="avancarUmaPagina()">
+        <p>></p>
     </div>
 </div>

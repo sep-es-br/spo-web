@@ -41,5 +41,245 @@ export const InvestimentoMock : Investimento[] = [
         disponivel: 34569423,
         descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
         areaTematica: 'Cultura, Turismo, Esporte e Lazer'
+    },{
+        nome: 'Integra ES',
+        unidade: '22101 - SEFAZ',
+        planoOrcamentario: 1703,
+        previsto: 12430971.1,
+        homologado: 8320456,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Sistema online para compartilhamentos de informações fiscais com os Municipios',
+        areaTematica: 'Gestão Pública Inovadora'
+    },{
+        nome: 'Gerenciamento de Barragens',
+        unidade: '31101 - SEAG',
+        planoOrcamentario: 2389,
+        previsto: 21111600,
+        homologado: 11563582,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Contratação de empresa de Supervisão com o objetivo de apoio à Gerência de Infraestrutura e Obras Rurais - GIOR/SUBINF/SEAG-ES',
+        areaTematica: 'Agricultura e Meio Ambiente'
+    },{
+        nome: 'Restauração do Antigo Arquivo Público',
+        unidade: '40101 - SECULT',
+        planoOrcamentario: 2236,
+        previsto: 10100300,
+        homologado: 10100300,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
+        areaTematica: 'Cultura, Turismo, Esporte e Lazer'
+    },{
+        nome: 'Integra ES',
+        unidade: '22101 - SEFAZ',
+        planoOrcamentario: 1703,
+        previsto: 12430971.1,
+        homologado: 8320456,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Sistema online para compartilhamentos de informações fiscais com os Municipios',
+        areaTematica: 'Gestão Pública Inovadora'
+    },{
+        nome: 'Gerenciamento de Barragens',
+        unidade: '31101 - SEAG',
+        planoOrcamentario: 2389,
+        previsto: 21111600,
+        homologado: 11563582,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Contratação de empresa de Supervisão com o objetivo de apoio à Gerência de Infraestrutura e Obras Rurais - GIOR/SUBINF/SEAG-ES',
+        areaTematica: 'Agricultura e Meio Ambiente'
+    },{
+        nome: 'Restauração do Antigo Arquivo Público',
+        unidade: '40101 - SECULT',
+        planoOrcamentario: 2236,
+        previsto: 10100300,
+        homologado: 10100300,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
+        areaTematica: 'Cultura, Turismo, Esporte e Lazer'
+    },{
+        nome: 'Integra ES',
+        unidade: '22101 - SEFAZ',
+        planoOrcamentario: 1703,
+        previsto: 12430971.1,
+        homologado: 8320456,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Sistema online para compartilhamentos de informações fiscais com os Municipios',
+        areaTematica: 'Gestão Pública Inovadora'
+    },{
+        nome: 'Gerenciamento de Barragens',
+        unidade: '31101 - SEAG',
+        planoOrcamentario: 2389,
+        previsto: 21111600,
+        homologado: 11563582,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Contratação de empresa de Supervisão com o objetivo de apoio à Gerência de Infraestrutura e Obras Rurais - GIOR/SUBINF/SEAG-ES',
+        areaTematica: 'Agricultura e Meio Ambiente'
+    },{
+        nome: 'Restauração do Antigo Arquivo Público',
+        unidade: '40101 - SECULT',
+        planoOrcamentario: 2236,
+        previsto: 10100300,
+        homologado: 10100300,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
+        areaTematica: 'Cultura, Turismo, Esporte e Lazer'
+    },{
+        nome: 'Integra ES',
+        unidade: '22101 - SEFAZ',
+        planoOrcamentario: 1703,
+        previsto: 12430971.1,
+        homologado: 8320456,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Sistema online para compartilhamentos de informações fiscais com os Municipios',
+        areaTematica: 'Gestão Pública Inovadora'
+    },{
+        nome: 'Gerenciamento de Barragens',
+        unidade: '31101 - SEAG',
+        planoOrcamentario: 2389,
+        previsto: 21111600,
+        homologado: 11563582,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Contratação de empresa de Supervisão com o objetivo de apoio à Gerência de Infraestrutura e Obras Rurais - GIOR/SUBINF/SEAG-ES',
+        areaTematica: 'Agricultura e Meio Ambiente'
+    },{
+        nome: 'Restauração do Antigo Arquivo Público',
+        unidade: '40101 - SECULT',
+        planoOrcamentario: 2236,
+        previsto: 10100300,
+        homologado: 10100300,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
+        areaTematica: 'Cultura, Turismo, Esporte e Lazer'
+    },{
+        nome: 'Integra ES',
+        unidade: '22101 - SEFAZ',
+        planoOrcamentario: 1703,
+        previsto: 12430971.1,
+        homologado: 8320456,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Sistema online para compartilhamentos de informações fiscais com os Municipios',
+        areaTematica: 'Gestão Pública Inovadora'
+    },{
+        nome: 'Gerenciamento de Barragens',
+        unidade: '31101 - SEAG',
+        planoOrcamentario: 2389,
+        previsto: 21111600,
+        homologado: 11563582,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Contratação de empresa de Supervisão com o objetivo de apoio à Gerência de Infraestrutura e Obras Rurais - GIOR/SUBINF/SEAG-ES',
+        areaTematica: 'Agricultura e Meio Ambiente'
+    },{
+        nome: 'Restauração do Antigo Arquivo Público',
+        unidade: '40101 - SECULT',
+        planoOrcamentario: 2236,
+        previsto: 10100300,
+        homologado: 10100300,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
+        areaTematica: 'Cultura, Turismo, Esporte e Lazer'
+    },{
+        nome: 'Integra ES',
+        unidade: '22101 - SEFAZ',
+        planoOrcamentario: 1703,
+        previsto: 12430971.1,
+        homologado: 8320456,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Sistema online para compartilhamentos de informações fiscais com os Municipios',
+        areaTematica: 'Gestão Pública Inovadora'
+    },{
+        nome: 'Gerenciamento de Barragens',
+        unidade: '31101 - SEAG',
+        planoOrcamentario: 2389,
+        previsto: 21111600,
+        homologado: 11563582,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Contratação de empresa de Supervisão com o objetivo de apoio à Gerência de Infraestrutura e Obras Rurais - GIOR/SUBINF/SEAG-ES',
+        areaTematica: 'Agricultura e Meio Ambiente'
+    },{
+        nome: 'Restauração do Antigo Arquivo Público',
+        unidade: '40101 - SECULT',
+        planoOrcamentario: 2236,
+        previsto: 10100300,
+        homologado: 10100300,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
+        areaTematica: 'Cultura, Turismo, Esporte e Lazer'
+    },{
+        nome: 'Integra ES',
+        unidade: '22101 - SEFAZ',
+        planoOrcamentario: 1703,
+        previsto: 12430971.1,
+        homologado: 8320456,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Sistema online para compartilhamentos de informações fiscais com os Municipios',
+        areaTematica: 'Gestão Pública Inovadora'
+    },{
+        nome: 'Gerenciamento de Barragens',
+        unidade: '31101 - SEAG',
+        planoOrcamentario: 2389,
+        previsto: 21111600,
+        homologado: 11563582,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Contratação de empresa de Supervisão com o objetivo de apoio à Gerência de Infraestrutura e Obras Rurais - GIOR/SUBINF/SEAG-ES',
+        areaTematica: 'Agricultura e Meio Ambiente'
+    },{
+        nome: 'Restauração do Antigo Arquivo Público',
+        unidade: '40101 - SECULT',
+        planoOrcamentario: 2236,
+        previsto: 10100300,
+        homologado: 10100300,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
+        areaTematica: 'Cultura, Turismo, Esporte e Lazer'
+    },{
+        nome: 'Integra ES',
+        unidade: '22101 - SEFAZ',
+        planoOrcamentario: 1703,
+        previsto: 12430971.1,
+        homologado: 8320456,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Sistema online para compartilhamentos de informações fiscais com os Municipios',
+        areaTematica: 'Gestão Pública Inovadora'
+    },{
+        nome: 'Gerenciamento de Barragens',
+        unidade: '31101 - SEAG',
+        planoOrcamentario: 2389,
+        previsto: 21111600,
+        homologado: 11563582,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Contratação de empresa de Supervisão com o objetivo de apoio à Gerência de Infraestrutura e Obras Rurais - GIOR/SUBINF/SEAG-ES',
+        areaTematica: 'Agricultura e Meio Ambiente'
+    },{
+        nome: 'Restauração do Antigo Arquivo Público',
+        unidade: '40101 - SECULT',
+        planoOrcamentario: 2236,
+        previsto: 10100300,
+        homologado: 10100300,
+        autorizado: 34569423,
+        disponivel: 34569423,
+        descricao: 'Projeto exercutivo de restauração da nova sede da Galeria Homero Massena: Projetar  soluções de acessibilidadde, de modernização das instalações',
+        areaTematica: 'Cultura, Turismo, Esporte e Lazer'
     }
 ]

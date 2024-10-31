@@ -1,6 +1,5 @@
 import { CommonModule } from "@angular/common";
 import { Component, ElementRef, ViewChild } from "@angular/core";
-import { NbEvaIconsModule } from "@nebular/eva-icons";
 import { MenuLink } from "../utils/menuLinks";
 import { RouterLink } from "@angular/router";
 
@@ -15,7 +14,8 @@ import { RouterLink } from "@angular/router";
 export class MenuComponent {
     menuItems = MenuLink;
 
-    @ViewChild("nav") navDiv : ElementRef;
+    @ViewChild("nav")
+    navDiv!: ElementRef;
 
     toggleSub(index : number) : void {
         const showDivClass = 'showDiv'
