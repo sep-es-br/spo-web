@@ -28,49 +28,50 @@
     </div>
 </div>
 <div id="listaDados" [class]="selectedDisplay">
-    <div *ngFor="let inv of data[paginaAtual-1]">
+    <spo-tira-investimento *ngFor="let inv of data[paginaAtual-1]" [investimento]="inv"></spo-tira-investimento>
+    <!-- <div *ngFor="let inv of data[paginaAtual-1]">
         <div id="uniImg" class="listNone">
             <img src="https://placehold.co/50" /> 
         </div>
         <div class="col seta gridNone"><img src="assets/img/arrow-right.svg" width="20px"></div>
         <div class="col name">
             <div id="invTxt" class="gridNone">Investimento</div>
-            <div id="invName">{{inv.nome}}</div>
+            <div id="invName">{{inv.nome | shortString : 45}}</div>
         </div>
         <div class="col">
             <div id="uniTxt" class="gridNone">Unidade</div>
-            <div id="invUnidade">{{inv.unidade}}</div>
+            <div id="invUnidade">Holder</div>
         </div>
         <div class="col gridNone">
             <div>Plano Orçamentário</div>
-            <div>{{inv.planoOrcamentario}}</div>
+            <div>{{inv.codPO}}</div>
         </div>
         <div class="col gridNone">
             <div>Previsto</div>
-            <div>{{inv.previsto | customCurrency}}</div>
+            <div>{{inv.totalPrevisto | customCurrency}}</div>
         </div>
         <div class="col gridNone">
             <div>Homologado</div>
-            <div>{{inv.homologado | customCurrency}}</div>
+            <div>{{inv.totalHomologado | customCurrency}}</div>
         </div>
         <div class="col gridNone">
             <div>Autorizado</div>
-            <div>{{inv.autorizado | customCurrency}}</div>
+            <div>{{0 | customCurrency}}</div>
         </div>
         <div class="col gridNone">
             <div>Disponível</div>
-            <div>{{inv.disponivel | customCurrency}}</div>
+            <div>{{0 | customCurrency}}</div>
         </div>
         <div class="col opcoes gridNone">
             <span>...</span>
         </div>
         <div id="descricao" class="listNone">
-            <p>{{inv.descricao}}</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
         <div id="areaTemativa" class="listNone">
-            <p>{{inv.areaTematica}}</p>
+            <p>Area</p>
         </div>
-    </div> 
+    </div>  -->
 </div>
 <div id="paginacao">
     <div id="btnAcao" class="btnPagina {{paginaAtual === 1 ? 'btnPgInativo' : ''}}"

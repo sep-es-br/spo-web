@@ -7,27 +7,32 @@ import { DisponivelCardComponent } from "./disponivel-card/disponivel-card.compo
 import { InvestimentoFiltroComponent } from "./investimento-filtro/investimento-filtro.component";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { InvestimentosService } from "../../../utils/services/investimentos.service";
-import { Investimento } from "../../../utils/models/investimento";
 import { CustomCurrencyPipe } from "../../../utils/pipes/customCurrency.pipe";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { paginar } from "../../../utils/dataUtils";
 import { ObjetosService } from "../../../utils/services/objetos.service";
+import { InvestimentoDTO } from "../../../utils/models/InvestimentoDTO";
+import { ShortStringPipe } from "../../../utils/pipes/shortString.pipe";
+import { TiraInvestimentoComponent } from "../../../utils/components/tira-investimento/tira-investimento.component";
+import { InvestimentoFiltroDTO } from "../../../utils/models/InvestimentoFiltroDTO";
 
 @Component({
     selector: 'spo-investimentos',
     templateUrl: './investimentos.component.html',
     styleUrl: './investimentos.component.scss',
     standalone: true,
-    imports: [CommonModule, RouterLink, CustomCurrencyPipe, ReactiveFormsModule, PrevistoCardComponent, HomologadoCardComponent, AutorizadoCardComponent, DisponivelCardComponent, InvestimentoFiltroComponent]
+    imports: [CommonModule, TiraInvestimentoComponent, RouterLink, CustomCurrencyPipe, ShortStringPipe, ReactiveFormsModule, PrevistoCardComponent, HomologadoCardComponent, AutorizadoCardComponent, DisponivelCardComponent, InvestimentoFiltroComponent]
 })
 export class InvestimentosComponent implements OnInit {
 
     CLASS_DISPLAYLISTA = "displayLista";
-    CLASS_DISPLAYGRADE = "displayGrade"
+    CLASS_DISPLAYGRADE = "displayGrade";
+
+    filtro : InvestimentoFiltroDTO = { };
 
     txtBusca = new FormControl('');
 
-    data : Investimento[][] = [];
+    data : InvestimentoDTO[][] = [];
     qtObjetos = 0;
 
     paginaAtual = 1;
@@ -35,19 +40,49 @@ export class InvestimentosComponent implements OnInit {
     selectedDisplay : string = this.CLASS_DISPLAYLISTA
 
     constructor(private service: InvestimentosService,
-                private objService: ObjetosService
+                private objService: ObjetosService,
+                private router: Router
     ) {
         
     }
 
+
     ngOnInit(): void {
         this.txtBusca.valueChanges.subscribe(value => {
-            if(value === null) return
-            this.data = paginar(this.service.getListaInvestimentos(value), 15);
+
+            this.updateFiltro()   ;
+            
         })
         if(this.txtBusca.value === null) return
-        this.data = paginar(this.service.getListaInvestimentos(this.txtBusca.value), 15);
-        this.qtObjetos = this.objService.getListaObjetos('').length;
+        this.updateFiltro();
+
+        this.objService.getListaObjetos('').subscribe({
+            next: (objs) => {
+                this.qtObjetos = objs.length;
+            },  
+            error: (err) => {
+                console.log(err.error.erros)
+                this.router.navigate(['login'])
+            }
+        });
+
+    }
+
+    updateFiltro(){
+
+
+        this.recarregarLista();
+    }
+
+    recarregarLista() {
+        this.service.getListaInvestimentos(this.filtro).subscribe({
+            next: (invs) => {
+                this.data = paginar(invs, 15);
+            },
+            error: (err) =>{
+                console.log(err.error.erros)
+            }
+        });
     }
 
 

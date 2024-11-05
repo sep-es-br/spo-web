@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Investimento } from "../models/investimento";
-import { InvestimentoMock } from "../mocks/investimentoMock";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
+import { InvestimentoDTO } from "../models/InvestimentoDTO";
+import { InvestimentoFiltroDTO } from "../models/InvestimentoFiltroDTO";
 
 @Injectable({providedIn: "root"})
 export class InvestimentosService {
@@ -16,8 +16,8 @@ export class InvestimentosService {
         this._http = http;
     }
 
-    public getListaInvestimentos( filtro : string ) : Investimento[] {
-        return InvestimentoMock;
+    public getListaInvestimentos( filtro : InvestimentoFiltroDTO ) : Observable<InvestimentoDTO[]> {
+        return this._http.get<InvestimentoDTO[]>(`${environment.apiUrl}/investimento/all`);
     }
 
 

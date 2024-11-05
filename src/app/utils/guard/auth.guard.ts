@@ -8,11 +8,17 @@ import {
 export const authGuard: CanActivateChildFn = (route, state) => {
   let logado = checarLogin();
 
-  if(!logado) {
-    return reRouteTo('login')
-  } else {
-    return true;
+  if (!logado && route.routeConfig?.path !== 'login') {
+    return reRouteTo('login');
   }
+  
+  if (logado && route.routeConfig?.path === 'login') {
+    return reRouteTo('home');
+  }
+  
+  return true;
+
+
 
 };
 

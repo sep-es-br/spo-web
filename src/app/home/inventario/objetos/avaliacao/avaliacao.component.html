@@ -9,7 +9,8 @@
     </div>
 </div>
 <div id="listaDados" class="displayLista">
-    <div *ngFor="let inv of data[paginaAtual-1]">
+    <spo-tira-objeto *ngFor="let obj of data[paginaAtual-1]" [objeto]="obj"></spo-tira-objeto>
+    <!-- <div *ngFor="let inv of data[paginaAtual-1]">
         <div class="col seta gridNone"><img src="assets/img/arrow-right.svg" width="20px"></div>
         <div class="col name">
             <div id="invTxt" class="gridNone">Objeto</div>
@@ -46,7 +47,7 @@
         <div class="col opcoes gridNone">
             <span>...</span>
         </div>
-    </div> 
+    </div>  -->
 </div>
 <div id="paginacao">
     <div id="btnAcao" class="btnPagina {{paginaAtual === 1 ? 'btnPgInativo' : ''}}"
