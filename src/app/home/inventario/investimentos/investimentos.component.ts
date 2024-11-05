@@ -16,7 +16,7 @@ import { ObjetosService } from "../../../utils/services/objetos.service";
 @Component({
     selector: 'spo-investimentos',
     templateUrl: './investimentos.component.html',
-    styleUrl: './investimentos.component.css',
+    styleUrl: './investimentos.component.scss',
     standalone: true,
     imports: [CommonModule, RouterLink, CustomCurrencyPipe, ReactiveFormsModule, PrevistoCardComponent, HomologadoCardComponent, AutorizadoCardComponent, DisponivelCardComponent, InvestimentoFiltroComponent]
 })

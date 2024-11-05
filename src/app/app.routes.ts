@@ -6,10 +6,11 @@ import { authGuard } from './utils/guard/auth.guard';
 
 export const routes: Routes = [
     {
-        path: 'home',
-        component: HomeComponent,
-        canActivateChild: [authGuard],
-        loadChildren: () => import('./home/home-routing.module').then(m => m.HomeRoutingModule)
+      title: 'SPO',
+      path: 'home',
+      component: HomeComponent,
+      canActivateChild: [authGuard],
+      loadChildren: () => import('./home/home-routing.module').then(m => m.HomeRoutingModule)
     },
     {
       title: 'Autorizando...',
@@ -17,7 +18,7 @@ export const routes: Routes = [
       component: AuthRedirectComponent,
     },
     {
-      title: 'InfoPlan - Login',
+      title: 'SPO - Login',
       path: 'login',
       canActivate: [authGuard],
       component: LoginComponent,

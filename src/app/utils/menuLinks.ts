@@ -2,7 +2,7 @@ export const MenuLink = [{
         title : 'Inventário',
         icon: 'home',
         children : [{
-            title: 'PIP - Plano de Investimento Público',
+            title: 'Investimentos',
             link: 'home/inventario/investimentos'
         }]
     }, {

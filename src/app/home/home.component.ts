@@ -5,13 +5,14 @@ import { RouterModule, RouterOutlet } from "@angular/router";
 import { paginar } from "../utils/dataUtils";
 import { IProfile } from "../utils/interfaces/profile.interface";
 import { ProfileService } from "../utils/services/profile.service";
+import { MenuComponent } from "../menu/menu.component";
 
 @Component({
     selector: 'spo-home',
     templateUrl: 'home.component.html',
     styleUrl: 'home.component.css',
     standalone: true,
-    imports: [CommonModule, HeaderComponent, RouterOutlet, RouterModule]
+    imports: [CommonModule, HeaderComponent, RouterOutlet, RouterModule, MenuComponent]
 })
 export class HomeComponent implements OnInit{
 

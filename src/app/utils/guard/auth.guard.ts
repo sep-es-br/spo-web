@@ -6,19 +6,12 @@ import {
 } from '@angular/router';
 
 export const authGuard: CanActivateChildFn = (route, state) => {
-  let loginPageReroute;
   let logado = checarLogin();
 
-  if (logado) {
-    if( route.routeConfig?.path === 'login' )
-      return reRouteTo('');
-    else
-      return true;
+  if(!logado) {
+    return reRouteTo('login')
   } else {
-    if( route.routeConfig?.path === 'login' )
-      return true
-    else 
-      return reRouteTo('login')
+    return true;
   }
 
 };
@@ -34,6 +27,7 @@ function reRouteTo(path : string) : UrlTree {
 
 function checarLogin() : boolean{
   const storageToken = sessionStorage.getItem('token');
+  const storageUserInfo = sessionStorage.getItem('user-profile');
 
-  return !!storageToken;
+  return !!storageToken && !!storageUserInfo;
 }

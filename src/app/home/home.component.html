@@ -1,4 +1,9 @@
-<spo-header [home]="this"></spo-header>
+<div id="menu">
+    <spo-menu></spo-menu>
+</div>
 <div id="conteudo">
-    <router-outlet></router-outlet>
+    <spo-header [home]="this"></spo-header>
+    <div id="conteudo">
+        <router-outlet></router-outlet>
+    </div>
 </div>
