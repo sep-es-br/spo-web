@@ -11,9 +11,9 @@ import { InvestimentosService } from "../../../../utils/services/investimentos.s
     imports: [CommonModule, CustomCurrencyPipe]
 })
 export class DisponivelCardComponent {
-    valor : number = 4368956178.51;
+    valor : number = -1;
 
     constructor(private servico : InvestimentosService) {
-        this.valor = servico.getTotalDisponivel();
+        servico.getTotalDisponivel().subscribe(valor => this.valor = valor);
     }
 }

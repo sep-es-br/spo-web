@@ -11,10 +11,10 @@ import { InvestimentosService } from "../../../../utils/services/investimentos.s
     imports: [CommonModule, CustomCurrencyPipe]
 })
 export class AutorizadoCardComponent {
-    valor : number;
+    valor : number = -1;
 
     constructor(private servico: InvestimentosService) {
-        this.valor = servico.getTotalAutorizado();
+        this.servico.getTotalAutorizado().subscribe(valor => this.valor = valor);
     }
 }
 

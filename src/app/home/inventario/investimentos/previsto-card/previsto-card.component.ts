@@ -12,10 +12,11 @@ import { InvestimentosService } from "../../../../utils/services/investimentos.s
 })
 export class PrevistoCardComponent {
     
-    valor : number;
+    valor : number = -1;
 
     constructor(private servico: InvestimentosService) {
-        this.valor = this.servico.getTotalPrevisto();
+        this.servico.getTotalPrevisto().subscribe(valor => this.valor = valor);
+
     }
 
 }
