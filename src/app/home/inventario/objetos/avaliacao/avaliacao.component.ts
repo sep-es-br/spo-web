@@ -35,8 +35,7 @@ export class AvaliacaoComponent {
     }
 
     carregarLista(filtro:string | null) {
-        if(filtro === null) return
-        this.service.getListaObjetos(filtro).subscribe({
+        this.service.getListaObjetos({nome: filtro}).subscribe({
             next: (objs) => {
                 this.data = paginar(objs, 15);
             },

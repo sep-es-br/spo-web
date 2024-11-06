@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, Input } from "@angular/core";
 import { CustomCurrencyPipe } from "../../../../utils/pipes/customCurrency.pipe";
 import { InvestimentosService } from "../../../../utils/services/investimentos.service";
+import { InvestimentosComponent } from "../investimentos.component";
 
 @Component({
     selector: 'spo-previsto-card',
@@ -10,13 +11,22 @@ import { InvestimentosService } from "../../../../utils/services/investimentos.s
     standalone: true,
     imports: [CommonModule, CustomCurrencyPipe]
 })
-export class PrevistoCardComponent {
+export class PrevistoCardComponent implements AfterViewInit{
     
     valor : number = -1;
 
-    constructor(private servico: InvestimentosService) {
-        this.servico.getTotalPrevisto().subscribe(valor => this.valor = valor);
+    @Input() parent! : InvestimentosComponent;
 
+    constructor(private servico: InvestimentosService) {
+
+    }
+
+    ngAfterViewInit(): void {
+        this.updateValores(this.parent.filtro.exercicio!)
+    }
+
+    updateValores(exercicio : string){
+        this.servico.getTotalPrevisto(exercicio).subscribe(valor => this.valor = valor);
     }
 
 }

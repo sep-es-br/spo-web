@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
 import { InvestimentoDTO } from "../models/InvestimentoDTO";
@@ -17,19 +17,30 @@ export class InvestimentosService {
     }
 
     public getListaInvestimentos( filtro : InvestimentoFiltroDTO ) : Observable<InvestimentoDTO[]> {
-        return this._http.get<InvestimentoDTO[]>(`${environment.apiUrl}/investimento/all`);
+        return this._http.get<InvestimentoDTO[]>(`${environment.apiUrl}/investimento/all`,
+             {params: {filtroJson: JSON.stringify(filtro)}});
     }
 
 
-    public getTotalPrevisto() : Observable<number> {
+    public getTotalPrevisto(ano : string) : Observable<number> {
         
-        return this._http.get<number>(`${environment.apiUrl}/custo/totalPrevisto`)
+        const totalPrevistoUrl = `${environment.apiUrl}/custo/totalPrevisto`;
+
+
+        return this._http.get<number>(totalPrevistoUrl, {params: {
+            exercicio: ano
+        }})
 
     }
 
 
-    public getTotalHomologado() : Observable<number> {
-        return this._http.get<number>(`${environment.apiUrl}/custo/totalHomologado`)
+    public getTotalHomologado(ano : string) : Observable<number> {
+          
+        const totalHomologadoUrl = `${environment.apiUrl}/custo/totalPrevisto`;
+
+        return this._http.get<number>(totalHomologadoUrl, {params: {
+            exercicio: ano
+        }})
 
     }
 

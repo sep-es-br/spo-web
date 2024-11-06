@@ -1,7 +1,7 @@
 export class InvestimentoFiltroDTO {
-    nome? : string;
-    codUnidade? : number;
-    codPO? : number;
-    exercicio?: string;
+    nome? : string | null ;
+    codUnidade? : number | null;
+    codPO? : number | null;
+    exercicio?: string | null;
 
 }

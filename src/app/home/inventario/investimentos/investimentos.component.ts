@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, ErrorHandler, OnInit, ViewChild } from "@angular/core";
 import { PrevistoCardComponent } from "./previsto-card/previsto-card.component";
 import { HomologadoCardComponent } from "./homologado-card/homologado-card.component";
 import { AutorizadoCardComponent } from "./autorizado-card/autorizado-card.component";
@@ -15,6 +15,8 @@ import { InvestimentoDTO } from "../../../utils/models/InvestimentoDTO";
 import { ShortStringPipe } from "../../../utils/pipes/shortString.pipe";
 import { TiraInvestimentoComponent } from "../../../utils/components/tira-investimento/tira-investimento.component";
 import { InvestimentoFiltroDTO } from "../../../utils/models/InvestimentoFiltroDTO";
+import { ObjetoFiltroDTO } from "../../../utils/models/ObjetoFiltroDTO";
+import { handleError } from "../../../utils/ErrorHandler";
 
 @Component({
     selector: 'spo-investimentos',
@@ -23,10 +25,14 @@ import { InvestimentoFiltroDTO } from "../../../utils/models/InvestimentoFiltroD
     standalone: true,
     imports: [CommonModule, TiraInvestimentoComponent, RouterLink, CustomCurrencyPipe, ShortStringPipe, ReactiveFormsModule, PrevistoCardComponent, HomologadoCardComponent, AutorizadoCardComponent, DisponivelCardComponent, InvestimentoFiltroComponent]
 })
-export class InvestimentosComponent implements OnInit {
+export class InvestimentosComponent implements AfterViewInit {
 
     CLASS_DISPLAYLISTA = "displayLista";
     CLASS_DISPLAYGRADE = "displayGrade";
+
+    @ViewChild(InvestimentoFiltroComponent) filtroComponent! : InvestimentoFiltroComponent;
+    @ViewChild(PrevistoCardComponent) previstoCardComponent! : PrevistoCardComponent;
+    @ViewChild(HomologadoCardComponent) homologadoCardComponent! : HomologadoCardComponent;
 
     filtro : InvestimentoFiltroDTO = { };
 
@@ -46,30 +52,33 @@ export class InvestimentosComponent implements OnInit {
         
     }
 
-
-    ngOnInit(): void {
-        this.txtBusca.valueChanges.subscribe(value => {
-
-            this.updateFiltro()   ;
-            
-        })
-        if(this.txtBusca.value === null) return
+    ngAfterViewInit(): void {
+        this.txtBusca.valueChanges.subscribe(value => this.updateFiltro() )
+        this.filtroComponent.form.valueChanges.subscribe(value => this.updateFiltro())
         this.updateFiltro();
 
-        this.objService.getListaObjetos('').subscribe({
+        let objetoFiltro : ObjetoFiltroDTO = {
+            exercicio: this.filtroComponent.form.get("exercicio")?.value
+        }
+
+        this.objService.getListaObjetos(objetoFiltro).subscribe({
             next: (objs) => {
                 this.qtObjetos = objs.length;
             },  
-            error: (err) => {
-                console.log(err.error.erros)
-                this.router.navigate(['login'])
-            }
+            error: (err) => handleError(err, this.router)
         });
 
     }
 
     updateFiltro(){
 
+        let codPoStr = this.filtroComponent.form.get("planoOrcamentarioControl")?.value;
+        let conUniStr = this.filtroComponent.form.get("unidadeOrcamentariaControl")?.value;
+
+        this.filtro.exercicio = this.filtroComponent.form.get("exercicio")?.value;
+        this.filtro.codPO = (!codPoStr || codPoStr === '') ? null :  Number(codPoStr);
+        this.filtro.codUnidade = (!conUniStr || conUniStr === '') ? null :  Number(conUniStr)
+        this.filtro.nome = this.txtBusca.value;
 
         this.recarregarLista();
     }
@@ -83,6 +92,9 @@ export class InvestimentosComponent implements OnInit {
                 console.log(err.error.erros)
             }
         });
+        
+        this.previstoCardComponent.updateValores(this.filtro.exercicio!);
+        this.homologadoCardComponent.updateValor(this.filtro.exercicio!);
     }
 
 
