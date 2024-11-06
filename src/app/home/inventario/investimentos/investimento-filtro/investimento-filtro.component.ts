@@ -13,7 +13,7 @@ import { UnidadeOrcamentariaService } from "../../../../utils/services/unidadeOr
 @Component({
     selector: 'spo-investimento-filtro',
     templateUrl: './investimento-filtro.component.html',
-    styleUrl: './investimento-filtro.component.css',
+    styleUrl: './investimento-filtro.component.scss',
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule]
 })
@@ -60,7 +60,7 @@ export class InvestimentoFiltroComponent {
         this.form = new FormGroup({
             unidadeOrcamentariaControl: new FormControl(null),
             planoOrcamentarioControl: new FormControl(null),
-            exercicio: new FormControl("")
+            exercicio: new FormControl(null)
         })
 
         

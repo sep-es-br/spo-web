@@ -1,19 +1,22 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
-import { Observable } from "rxjs";
+import { catchError, Observable, throwError } from "rxjs";
 import { InvestimentoDTO } from "../models/InvestimentoDTO";
 import { InvestimentoFiltroDTO } from "../models/InvestimentoFiltroDTO";
+import { ErrorHandlerService } from "./error-handler.service";
 
 @Injectable({providedIn: "root"})
 export class InvestimentosService {
 
     private _http : HttpClient;
+    private _errorHandlerService: ErrorHandlerService;
 
 
 
-    constructor(http : HttpClient){
+    constructor(http : HttpClient, errorHandlerService: ErrorHandlerService){
         this._http = http;
+        this._errorHandlerService = errorHandlerService;
     }
 
     public getListaInvestimentos( filtro : InvestimentoFiltroDTO ) : Observable<InvestimentoDTO[]> {
@@ -24,10 +27,7 @@ export class InvestimentosService {
 
     public getTotalPrevisto(ano : string) : Observable<number> {
         
-        const totalPrevistoUrl = `${environment.apiUrl}/custo/totalPrevisto`;
-
-
-        return this._http.get<number>(totalPrevistoUrl, {params: {
+        return this._http.get<number>(`${environment.apiUrl}/custo/totalPrevisto`, {params: {
             exercicio: ano
         }})
 
@@ -40,19 +40,31 @@ export class InvestimentosService {
 
         return this._http.get<number>(totalHomologadoUrl, {params: {
             exercicio: ano
-        }})
+        }}).pipe(
+            catchError((err: HttpErrorResponse) => {
+            this._errorHandlerService.handleError(err);
+            return throwError(() => err);
+          }))
 
     }
 
 
     public getTotalAutorizado() : Observable<number> {
-        return this._http.get<number>(`${environment.apiUrl}/custo/totalAutorizado`)
+        return this._http.get<number>(`${environment.apiUrl}/custo/totalAutorizado`).pipe(
+            catchError((err: HttpErrorResponse) => {
+            this._errorHandlerService.handleError(err);
+            return throwError(() => err);
+          }))
 
     }
 
 
     public getTotalDisponivel() : Observable<number> {
-        return this._http.get<number>(`${environment.apiUrl}/custo/totalDisponivel`)
+        return this._http.get<number>(`${environment.apiUrl}/custo/totalDisponivel`).pipe(
+            catchError((err: HttpErrorResponse) => {
+            this._errorHandlerService.handleError(err);
+            return throwError(() => err);
+          }))
 
     }
 

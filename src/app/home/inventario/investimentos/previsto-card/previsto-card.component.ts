@@ -11,18 +11,12 @@ import { InvestimentosComponent } from "../investimentos.component";
     standalone: true,
     imports: [CommonModule, CustomCurrencyPipe]
 })
-export class PrevistoCardComponent implements AfterViewInit{
+export class PrevistoCardComponent {
     
     valor : number = -1;
 
-    @Input() parent! : InvestimentosComponent;
-
     constructor(private servico: InvestimentosService) {
 
-    }
-
-    ngAfterViewInit(): void {
-        this.updateValores(this.parent.filtro.exercicio!)
     }
 
     updateValores(exercicio : string){

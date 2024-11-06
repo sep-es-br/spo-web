@@ -4,9 +4,14 @@
 }
 
 :host select {
+    //appearance: none;
     background-color: unset;
     border: unset;
     color: rgb(127, 127, 127);
+
+    option:hover {
+        background-color: var(--cor-primaria);
+    }
 }
 
 :host select:focus {

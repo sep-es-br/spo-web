@@ -15,11 +15,14 @@ import { HomeComponent } from "../home/home.component";
 export class HeaderComponent implements OnInit {
 
     @ViewChild('imgProfile') private profileImgDiv : ElementRef | undefined;
+    @ViewChild('menuUser') private menuUserElem? : HTMLDivElement;
 
     title = '';
     userName : string | undefined = 'Diego Gaede'
     userEmail : string | undefined = 'diego.gaede@sep.es.gov.br'
     iniciais : string | undefined = 'DG';
+
+    showMenuUser : boolean = false;
 
     @Input() home : HomeComponent | undefined;
 
@@ -36,6 +39,14 @@ export class HeaderComponent implements OnInit {
             }
         })
 
+    }
+
+    logout(){
+        
+        sessionStorage.removeItem('token');
+
+        this.router.navigateByUrl('login');
+        
     }
 
     ngOnInit(): void {

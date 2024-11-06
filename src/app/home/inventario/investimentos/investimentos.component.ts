@@ -55,7 +55,6 @@ export class InvestimentosComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this.txtBusca.valueChanges.subscribe(value => this.updateFiltro() )
         this.filtroComponent.form.valueChanges.subscribe(value => this.updateFiltro())
-        this.updateFiltro();
 
         let objetoFiltro : ObjetoFiltroDTO = {
             exercicio: this.filtroComponent.form.get("exercicio")?.value
@@ -71,13 +70,9 @@ export class InvestimentosComponent implements AfterViewInit {
     }
 
     updateFiltro(){
-
-        let codPoStr = this.filtroComponent.form.get("planoOrcamentarioControl")?.value;
-        let conUniStr = this.filtroComponent.form.get("unidadeOrcamentariaControl")?.value;
-
         this.filtro.exercicio = this.filtroComponent.form.get("exercicio")?.value;
-        this.filtro.codPO = (!codPoStr || codPoStr === '') ? null :  Number(codPoStr);
-        this.filtro.codUnidade = (!conUniStr || conUniStr === '') ? null :  Number(conUniStr)
+        this.filtro.codPO = this.filtroComponent.form.get("planoOrcamentarioControl")?.value;
+        this.filtro.codUnidade = this.filtroComponent.form.get("unidadeOrcamentariaControl")?.value;
         this.filtro.nome = this.txtBusca.value;
 
         this.recarregarLista();
