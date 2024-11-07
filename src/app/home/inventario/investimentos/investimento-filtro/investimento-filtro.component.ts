@@ -3,7 +3,6 @@ import { Component, Input } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { InvestimentosComponent } from "../investimentos.component";
 import { InfosService } from "../../../../utils/services/infos.service";
-import { handleError } from "../../../../utils/ErrorHandler";
 import { Router } from "@angular/router";
 import { PlanoOrcamentarioService } from "../../../../utils/services/planoOrcamentario.service";
 import { PlanoOrcamentarioDTO } from "../../../../utils/models/PlanoOrcamentarioDTO";
@@ -31,15 +30,12 @@ export class InvestimentoFiltroComponent {
                 private unidadeService: UnidadeOrcamentariaService,
             private router: Router
     ) {
-        this.infosService.getAllAnos().subscribe({
-            next: (anosList) => {
+        this.infosService.getAllAnos().subscribe((anosList) => {
                 this.anos = anosList
 
                 this.form.get("exercicio")?.setValue(this.anos[0]);
 
-            },
-            error: (err) => handleError(err, this.router)
-        })
+            })
 
         this.planoService.getAllPlanos().subscribe({
             next: (planoList) => {
@@ -48,13 +44,10 @@ export class InvestimentoFiltroComponent {
             }
         });
 
-        this.unidadeService.getAllUnidadesOrcamentarias().subscribe({
-            error: (err) => handleError(err, this.router),
-            next: (unidadeList) => {
+        this.unidadeService.getAllUnidadesOrcamentarias().subscribe((unidadeList) => {
                 this.unidades = unidadeList;
 
-            }
-        })
+            })
 
 
         this.form = new FormGroup({

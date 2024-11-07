@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import { IHttpError } from '../interfaces/http-error.interface';
+import { Observable, throwError } from 'rxjs';
 
 
 /**
@@ -27,7 +28,7 @@ export class ErrorHandlerService {
    *
    * @param {HttpErrorResponse} error - O erro fornecido pelo seletor do operador RxJS `catchError`.
    */
-  public handleError(error: HttpErrorResponse): void {
+  public handleError(error: HttpErrorResponse): Observable<never> {
     const backEndError: IHttpError = error.error;
 
     const errorCode = backEndError.codigo;
@@ -42,5 +43,7 @@ export class ErrorHandlerService {
       default:
         break;
     }
+
+    return throwError(() => error)
   }
 }

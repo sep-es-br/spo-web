@@ -9,23 +9,13 @@ import { ErrorHandlerService } from "./error-handler.service";
 export class InfosService {
 
     
-    private _http : HttpClient;
-    private _errorHandlerService: ErrorHandlerService;
-
-
-
-    constructor(http : HttpClient, errorHandlerService: ErrorHandlerService){
-        this._http = http;
-        this._errorHandlerService = errorHandlerService;
+    constructor(private http : HttpClient, private errorHandlerService: ErrorHandlerService){
     }
 
 
     public getAllAnos() : Observable<string[]> {
-        return this._http.get<string[]>(`${environment.apiUrl}/infos/allAnos`).pipe(
-            catchError((err: HttpErrorResponse) => {
-            this._errorHandlerService.handleError(err);
-            return throwError(() => err);
-          }));
+        return this.http.get<string[]>(`${environment.apiUrl}/infos/allAnos`).pipe(
+            catchError(this.errorHandlerService.handleError));
     }
 
 }

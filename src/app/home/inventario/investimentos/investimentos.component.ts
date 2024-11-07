@@ -16,7 +16,7 @@ import { ShortStringPipe } from "../../../utils/pipes/shortString.pipe";
 import { TiraInvestimentoComponent } from "../../../utils/components/tira-investimento/tira-investimento.component";
 import { InvestimentoFiltroDTO } from "../../../utils/models/InvestimentoFiltroDTO";
 import { ObjetoFiltroDTO } from "../../../utils/models/ObjetoFiltroDTO";
-import { handleError } from "../../../utils/ErrorHandler";
+import { CustoService } from "../../../utils/services/custo.service";
 
 @Component({
     selector: 'spo-investimentos',
@@ -31,8 +31,11 @@ export class InvestimentosComponent implements AfterViewInit {
     CLASS_DISPLAYGRADE = "displayGrade";
 
     @ViewChild(InvestimentoFiltroComponent) filtroComponent! : InvestimentoFiltroComponent;
-    @ViewChild(PrevistoCardComponent) previstoCardComponent! : PrevistoCardComponent;
-    @ViewChild(HomologadoCardComponent) homologadoCardComponent! : HomologadoCardComponent;
+
+    totalPrevisto : number;
+    totalHomologado : number;
+    totalAutorizado : number;
+    totalDisponivel : number;
 
     filtro : InvestimentoFiltroDTO = { };
 
@@ -40,32 +43,19 @@ export class InvestimentosComponent implements AfterViewInit {
 
     data : InvestimentoDTO[][] = [];
     qtObjetos = 0;
+    qtInvestimento = 0;
 
     paginaAtual = 1;
 
     selectedDisplay : string = this.CLASS_DISPLAYLISTA
 
-    constructor(private service: InvestimentosService,
-                private objService: ObjetosService,
-                private router: Router
-    ) {
+    constructor( private service: InvestimentosService ) {
         
     }
 
     ngAfterViewInit(): void {
         this.txtBusca.valueChanges.subscribe(value => this.updateFiltro() )
         this.filtroComponent.form.valueChanges.subscribe(value => this.updateFiltro())
-
-        let objetoFiltro : ObjetoFiltroDTO = {
-            exercicio: this.filtroComponent.form.get("exercicio")?.value
-        }
-
-        this.objService.getListaObjetos(objetoFiltro).subscribe({
-            next: (objs) => {
-                this.qtObjetos = objs.length;
-            },  
-            error: (err) => handleError(err, this.router)
-        });
 
     }
 
@@ -79,27 +69,37 @@ export class InvestimentosComponent implements AfterViewInit {
     }
 
     recarregarLista() {
+
+        this.totalPrevisto = 0;
+        this.totalHomologado = 0;
+        this.totalAutorizado = 0;
+        this.totalDisponivel = 0;
+
+        this.qtObjetos = 0;
+
         this.service.getListaInvestimentos(this.filtro).subscribe({
             next: (invs) => {
                 this.data = paginar(invs, 15);
+                this.qtInvestimento = invs.length;
+
+                invs.forEach(inv => {
+                    this.totalPrevisto += inv.totalPrevisto;
+                    this.totalHomologado += inv.totalHomologado;
+                    this.totalAutorizado += inv.totalAutorizado;
+                    this.totalDisponivel += inv.totalDisponivel;
+
+                    this.qtObjetos += inv.objetos.length
+                })                
+
             },
             error: (err) =>{
                 console.log(err.error.erros)
             }
         });
-        
-        this.previstoCardComponent.updateValores(this.filtro.exercicio!);
-        this.homologadoCardComponent.updateValor(this.filtro.exercicio!);
+       
+
     }
 
-
-    qtInvestimento() : number{
-        let soma = 0;
-
-        this.data.forEach(arr => soma += arr.length);
-
-        return soma
-    }
 
     voltaUmaPagina() {
         if(this.paginaAtual > 1)

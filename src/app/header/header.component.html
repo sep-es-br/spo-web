@@ -3,7 +3,7 @@
         <p id="title">{{title}}</p>
         <p id="breadcrumb"><spo-breadcrumb></spo-breadcrumb></p>
     </div>
-    <div id="userInfo" (click)="showMenuUser = !showMenuUser">
+    <div id="userInfo" (click)="toggleMenuUser()">
         <div #imgProfile id="userImg">
             {{iniciais}}
         </div>
@@ -11,7 +11,7 @@
             <p>{{userName}}</p>
             <!-- <p id="email">{{userEmail}}</p> -->
         </div>
-        <div #menuUser [class]="'menuUser ' + (showMenuUser ? 'mostrar' : '')">
+        <div #menuUser [ngClass]="'menuUser ' + (showMenuUser ? 'mostrar' : '')">
             <div (click)="logout()">logout</div>
         </div>
     </div>

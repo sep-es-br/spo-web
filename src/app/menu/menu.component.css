@@ -21,8 +21,9 @@
         .subMenu {
             padding-left: 0;
             padding-right: 0;
-            width: 20rem;
-            display: none;
+            display: block;
+            overflow: hidden;
+            width: 0rem;
             background-color: white;
             color: var(--cor-primaria);
             font-family: "Open Sans Bold", "Open Sans", sans-serif;
@@ -31,6 +32,9 @@
             top: -0.5rem;
             border-radius: 3px;
             box-shadow: 1px 1px 3px rgba(170, 170, 170, 0.4);
+
+            transition: width 0.3s ease;
+            white-space: nowrap;
         
             > p {
                 font-weight: bold;
@@ -57,7 +61,7 @@
     }
     
     .showDiv {
-        display: block !important;
+        width: 20rem !important;
     }
 }
 

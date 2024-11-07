@@ -41,7 +41,9 @@
     position: relative;
     cursor: pointer;
     .menuUser {
-        display: none;
+        display: flex;
+        height: 0;
+        transition: height 0.3s ease;
         width: 100%;
         background-color: white;
         box-shadow: 0 0 0.5rem #0000005e;
@@ -50,6 +52,7 @@
         position: absolute;
         left: 0;
         top: calc(100% + 1rem);
+        
 
         > div {
             display: flex;
@@ -65,7 +68,7 @@
     }
 
     .menuUser.mostrar {
-        display: flex;
+        height: auto;
     }
 
 }

@@ -17,16 +17,13 @@ export class ProfileService {
   public sessionProfile$ = this._sessionProfileSubject.asObservable();
 
   constructor(
-    private _http: HttpClient,
-    private _errorHandlerService: ErrorHandlerService,
+    private http: HttpClient,
+    private errorHandlerService: ErrorHandlerService,
   ) { }
 
   public getUserInfo(): Observable<IProfile> {
-    return this._http.get<IProfile>(`${this._url}`).pipe(
-      catchError((err: HttpErrorResponse) => {
-        this._errorHandlerService.handleError(err);
-        return throwError(() => err);
-      })
+    return this.http.get<IProfile>(`${this._url}`).pipe(
+      catchError(this.errorHandlerService.handleError)
     );
   }
 }

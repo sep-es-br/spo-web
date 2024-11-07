@@ -5,7 +5,6 @@ import { paginar } from "../../../../utils/dataUtils";
 import { CustomCurrencyPipe } from "../../../../utils/pipes/customCurrency.pipe";
 import { ObjetosService } from "../../../../utils/services/objetos.service";
 import { ObjetoFiltroComponent } from "./objetos-filtro/objetos-filtro.component";
-import { handleError } from "../../../../utils/ErrorHandler";
 import { Router } from "@angular/router";
 import { ObjetoDTO } from "../../../../utils/models/ObjetoDTO";
 import { TiraObjetoComponent } from "../../../../utils/components/tira-objeto/tira-objeto.component";
@@ -35,13 +34,9 @@ export class AvaliacaoComponent {
     }
 
     carregarLista(filtro:string | null) {
-        this.service.getListaObjetos({nome: filtro}).subscribe({
-            next: (objs) => {
+        this.service.getListaObjetos({nome: filtro}).subscribe((objs) => {
                 this.data = paginar(objs, 15);
-            },
-            error: (err) => handleError(err, this.router)
-
-        });
+            });
     }
 
     qtObjetos() : number{

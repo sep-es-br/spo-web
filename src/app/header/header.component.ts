@@ -15,7 +15,7 @@ import { HomeComponent } from "../home/home.component";
 export class HeaderComponent implements OnInit {
 
     @ViewChild('imgProfile') private profileImgDiv : ElementRef | undefined;
-    @ViewChild('menuUser') private menuUserElem? : HTMLDivElement;
+    @ViewChild('menuUser') private menuUserElem? : ElementRef;
 
     title = '';
     userName : string | undefined = 'Diego Gaede'
@@ -39,6 +39,17 @@ export class HeaderComponent implements OnInit {
             }
         })
 
+    }
+
+    toggleMenuUser(){
+        let menuUser = this.menuUserElem.nativeElement as HTMLDivElement;
+        if(this.showMenuUser) {
+            menuUser.style.height = '0'
+        } else {
+            menuUser.style.height = `calc(${menuUser.scrollHeight}px + ${window.getComputedStyle(menuUser.querySelector('div')).getPropertyValue('padding')})`;
+        }
+
+        this.showMenuUser = !this.showMenuUser
     }
 
     logout(){

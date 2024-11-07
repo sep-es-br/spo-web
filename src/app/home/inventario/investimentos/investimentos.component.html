@@ -1,13 +1,13 @@
 <spo-investimento-filtro [parent]="this"></spo-investimento-filtro>
 <div id="valores">
-    <spo-previsto-card></spo-previsto-card>
-    <spo-homologado-card></spo-homologado-card>
-    <spo-autorizado-card></spo-autorizado-card>
-    <spo-disponivel-card></spo-disponivel-card>
+    <spo-previsto-card [valor]="totalPrevisto"></spo-previsto-card>
+    <spo-homologado-card [valor]="totalHomologado"></spo-homologado-card>
+    <spo-autorizado-card [valor]="totalAutorizado"></spo-autorizado-card>
+    <spo-disponivel-card [valor]="totalDisponivel" ></spo-disponivel-card>
 </div>
 <div id="cabecalho">
     <div id="title">
-        <p>Investimentos ({{qtInvestimento()}})</p>
+        <p>Investimentos ({{qtInvestimento}})</p>
         <div id="pesquisa">
             <img src="assets/img/search.svg" width="20px" />
             <input type="text" [formControl]="txtBusca" placeholder="Procurar" />
@@ -29,49 +29,6 @@
 </div>
 <div id="listaDados" [class]="selectedDisplay">
     <spo-tira-investimento *ngFor="let inv of data[paginaAtual-1]" [investimento]="inv"></spo-tira-investimento>
-    <!-- <div *ngFor="let inv of data[paginaAtual-1]">
-        <div id="uniImg" class="listNone">
-            <img src="https://placehold.co/50" /> 
-        </div>
-        <div class="col seta gridNone"><img src="assets/img/arrow-right.svg" width="20px"></div>
-        <div class="col name">
-            <div id="invTxt" class="gridNone">Investimento</div>
-            <div id="invName">{{inv.nome | shortString : 45}}</div>
-        </div>
-        <div class="col">
-            <div id="uniTxt" class="gridNone">Unidade</div>
-            <div id="invUnidade">Holder</div>
-        </div>
-        <div class="col gridNone">
-            <div>Plano Orçamentário</div>
-            <div>{{inv.codPO}}</div>
-        </div>
-        <div class="col gridNone">
-            <div>Previsto</div>
-            <div>{{inv.totalPrevisto | customCurrency}}</div>
-        </div>
-        <div class="col gridNone">
-            <div>Homologado</div>
-            <div>{{inv.totalHomologado | customCurrency}}</div>
-        </div>
-        <div class="col gridNone">
-            <div>Autorizado</div>
-            <div>{{0 | customCurrency}}</div>
-        </div>
-        <div class="col gridNone">
-            <div>Disponível</div>
-            <div>{{0 | customCurrency}}</div>
-        </div>
-        <div class="col opcoes gridNone">
-            <span>...</span>
-        </div>
-        <div id="descricao" class="listNone">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div id="areaTemativa" class="listNone">
-            <p>Area</p>
-        </div>
-    </div>  -->
 </div>
 <div id="paginacao">
     <div id="btnAcao" class="btnPagina {{paginaAtual === 1 ? 'btnPgInativo' : ''}}"

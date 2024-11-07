@@ -1,4 +1,4 @@
-<div id="investimento" (click)="aberto = !aberto">
+<div id="investimento" (click)="abrirFecharLista()">
     <div id="toggle">
         <fa-icon [icon]="aberto ? toggleSetaAtivo : toggleSeta"></fa-icon>
     </div>
@@ -15,7 +15,7 @@
         <div id="value">{{investimento.totalPrevisto | customCurrency }}</div>
     </div>
     <div>
-        <div id="label">Homologado</div>
+        <div id="label">Contrato</div>
         <div id="value">{{investimento.totalHomologado | customCurrency }}</div>
     </div>
     <div>
@@ -32,6 +32,7 @@
     </div>
     
 </div>
-<div id="objetoList" [ngStyle]="{display : aberto ? 'flex' : 'none'}">
+<div id="objetoList" #objLista [ngClass]="aberto ? 'aberto' : ''">
     <spo-tira-objeto *ngFor="let obj of investimento.objetos" [objeto]="obj"></spo-tira-objeto>
 </div>
+<!-- display : aberto ? 'flex' : 'none', -->
