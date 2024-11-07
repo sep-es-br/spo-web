@@ -23,4 +23,38 @@ export class CustoService {
             exercicio: exercicio
         }}).pipe(catchError(this.errorHandlerService.handleError))
     }
+
+    public getTotalPrevisto(ano : string) : Observable<number> {
+        
+        return this.http.get<number>(`${environment.apiUrl}/custo/totalPrevisto`, {params: {
+            exercicio: ano
+        }}).pipe(catchError(this.errorHandlerService.handleError))
+
+    }
+
+
+    public getTotalHomologado(ano : string) : Observable<number> {
+          
+        const totalHomologadoUrl = `${environment.apiUrl}/custo/totalPrevisto`;
+
+        return this.http.get<number>(totalHomologadoUrl, {params: {
+            exercicio: ano
+        }}).pipe(
+            catchError(this.errorHandlerService.handleError))
+
+    }
+
+
+    public getTotalAutorizado() : Observable<number> {
+        return this.http.get<number>(`${environment.apiUrl}/custo/totalAutorizado`).pipe(
+            catchError(this.errorHandlerService.handleError))
+
+    }
+
+
+    public getTotalDisponivel() : Observable<number> {
+        return this.http.get<number>(`${environment.apiUrl}/custo/totalDisponivel`).pipe(
+            catchError(this.errorHandlerService.handleError))
+
+    }
 }
