@@ -1,18 +1,22 @@
 
 <div class="loginBox">
     <main>
-        <img class="icone-info-plan" src="assets/img/pip_logo.png" width="300px">
-
-        <h2 class="cover-heading">Sistema de Planejamento Orçamentario</h2>
-
-        <button type="button" (click)="login()" class="btn btn-lg btn-default">
+        <div id="mainLogo">
+            <div id="imgLogo">
+                <img class="icone-info-plan" src="assets/img/pipIcon.svg">
+            </div>
+            <div id="logoInfo">
+                <h1>SPO</h1>
+                <h2>Sistema de Planejamento Orçamentario</h2>
+            </div>
+        </div>
+        <button type="button" (click)="login()">
             <div>Entrar com Acesso Cidadão</div>
             <fa-icon [icon]="faRightToBracket"></fa-icon>
-            <i class="fa-solid fa-right-to-bracket"></i>
         </button>
     </main>
     <footer>
-        <div class="">Secretaria de Economia e Planejamento</div>
-        <div class="">Governo do Estado do Espírito Santo</div>
+        <div>Secretaria de Economia e Planejamento</div>
+        <div>Governo do Estado do Espírito Santo</div>
     </footer>
 </div>

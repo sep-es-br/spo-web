@@ -4,15 +4,14 @@
         <p id="breadcrumb"><spo-breadcrumb></spo-breadcrumb></p>
     </div>
     <div id="userInfo" (click)="toggleMenuUser()">
-        <div #imgProfile id="userImg">
+        <div id="userImg">
             {{iniciais}}
         </div>
         <div id="userData">
-            <p>{{userName}}</p>
-            <!-- <p id="email">{{userEmail}}</p> -->
+            <p>{{user.name}}</p>
         </div>
         <div #menuUser [ngClass]="'menuUser ' + (showMenuUser ? 'mostrar' : '')">
-            <div (click)="logout()">logout</div>
+            <div (click)="logout()">Sair</div>
         </div>
     </div>
     

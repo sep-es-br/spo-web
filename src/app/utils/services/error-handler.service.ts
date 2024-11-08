@@ -35,9 +35,11 @@ export class ErrorHandlerService {
 
     switch (errorCode) {
       case 401:
+        sessionStorage.removeItem('token');
         this._router.navigateByUrl('login');
         break;
       case 403:
+        sessionStorage.removeItem('token');
         this._router.navigateByUrl('login');
         break;
       default:

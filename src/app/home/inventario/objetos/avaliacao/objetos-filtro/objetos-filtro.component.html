@@ -1,11 +1,12 @@
 <form [formGroup]="form">
     <select formControlName="statusControl">
-        <option ngValue="">Status</option>
+        <option [ngValue]="null">Status</option>
     </select>
     <select formControlName="unidadeOrcamentariaControl">
-        <option ngValue="">Unidade Orçamentária</option>
+        <option [ngValue]="null">Unidade Orçamentária</option>
+        <option *ngFor="let unidade of unidades" [ngValue]="unidade.id">{{unidade.sigla}}</option>
     </select>
     <select formControlName="exercicio">
-        <option ngValue="2024">2024</option>
+        <option *ngFor="let ano of anos" [ngValue]="ano">{{ano}}</option>
     </select>
 </form>

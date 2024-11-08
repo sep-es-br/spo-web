@@ -6,7 +6,7 @@ import { breadCrumbNames } from "./breadCrumb-data";
 @Component({
     selector: 'spo-breadcrumb',
     templateUrl: './breadcrumb.component.html',
-    styleUrl: 'breadcrumb.component.css',
+    styleUrl: 'breadcrumb.component.scss',
     standalone: true,
     imports: [CommonModule, RouterModule, RouterLink]
 })
@@ -24,7 +24,7 @@ export class BreadCrumbComponent {
             if (event instanceof NavigationEnd) {
                 let activeRouter = this.route.snapshot;
                 while (activeRouter.children.length > 0) {
-                    activeRouter = activeRouter.firstChild ? activeRouter.firstChild : activeRouter;;
+                    activeRouter =  activeRouter.firstChild;
                 }
 
                 let fullPath = activeRouter.pathFromRoot

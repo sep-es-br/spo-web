@@ -1,6 +1,9 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { AfterViewInit, Component } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { InfosService } from "../../../../../utils/services/infos.service";
+import { UnidadeOrcamentariaService } from "../../../../../utils/services/unidadeOrcamentaria.service";
+import { UnidadeOrcamentariaDTO } from "../../../../../utils/models/UnidadeOrcamentariaDTO";
 
 @Component({
     selector: 'spo-objeto-filtro',
@@ -9,12 +12,35 @@ import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule]
 })
-export class ObjetoFiltroComponent {
+export class ObjetoFiltroComponent implements AfterViewInit {
     
     form = new FormGroup({
-        unidadeOrcamentariaControl: new FormControl(""),
-        statusControl: new FormControl(""),
-        exercicio: new FormControl("2024")
+        unidadeOrcamentariaControl: new FormControl(null),
+        statusControl: new FormControl(null),
+        exercicio: new FormControl(null)
     })
+
+    anos : string[];
+    unidades : UnidadeOrcamentariaDTO[];
+
+
+    constructor(private infoService : InfosService,
+                private unidadeService : UnidadeOrcamentariaService
+    ){
+
+    }
+
+    ngAfterViewInit(): void {
+        this.infoService.getAllAnos().subscribe(anosList => {
+            this.anos = anosList;
+
+            this.form.get('exercicio').setValue(this.anos[0]);
+        });
+
+        this.unidadeService.getAllUnidadesOrcamentarias().subscribe(unidadeList => {
+            this.unidades = unidadeList;
+        });
+    }
+
 
 }

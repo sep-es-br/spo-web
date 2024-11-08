@@ -1,26 +1,44 @@
 import { CommonModule } from "@angular/common";
-import { Component, inject, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, inject, OnInit, ViewChild } from "@angular/core";
 import { HeaderComponent } from "../header/header.component";
 import { RouterModule, RouterOutlet } from "@angular/router";
 import { paginar } from "../utils/dataUtils";
 import { IProfile } from "../utils/interfaces/profile.interface";
 import { ProfileService } from "../utils/services/profile.service";
 import { MenuComponent } from "../menu/menu.component";
+import { SwipeDirective } from "../utils/directive/swipe.directive";
 
 @Component({
     selector: 'spo-home',
     templateUrl: 'home.component.html',
-    styleUrl: 'home.component.css',
+    styleUrl: 'home.component.scss',
     standalone: true,
-    imports: [CommonModule, HeaderComponent, RouterOutlet, RouterModule, MenuComponent]
+    imports: [CommonModule, HeaderComponent, RouterOutlet, RouterModule, MenuComponent, SwipeDirective],
+    hostDirectives: [SwipeDirective]
 })
 export class HomeComponent implements OnInit{
+    
+    @ViewChild('divMenu') private divMenuElem : ElementRef;
 
-    @ViewChild(HeaderComponent) private headerElem : HeaderComponent | undefined;
+    user : IProfile;
 
-    private readonly _profile : ProfileService = inject(ProfileService);
+    constructor(private readonly profile: ProfileService ){
 
-    user : IProfile | undefined = undefined;
+    }
+
+    mostrarMenu = () => {
+        if(screen.width > 940) return;
+
+        let divElem = this.divMenuElem.nativeElement as HTMLDivElement;
+
+        divElem.style.transform = `translateX(0)`;
+    }
+    ocultarMenu = () =>  {
+        if(screen.width > 940) return;
+
+        this.divMenuElem.nativeElement.style.transform = '';
+
+    }
 
     ngOnInit(): void {
         this.loadUser();
@@ -33,12 +51,9 @@ export class HomeComponent implements OnInit{
 
         if(userJson) {
             this.user = JSON.parse(userJson)
-            this.headerElem?.loadProfileImage();
         } else {
-            this._profile.getUserInfo().subscribe(value => {
+            this.profile.getUserInfo().subscribe(value => {
                 this.user = value
-                
-                this.headerElem?.loadProfileImage();
             });
         }
 

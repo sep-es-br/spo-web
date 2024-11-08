@@ -1,4 +1,6 @@
 export class ObjetoFiltroDTO {
-    exercicio?: string | null;
-    nome?: string | null;
+    exercicio?: string;
+    nome?: string;
+    unidadeId? : string;
+    status?: string
 }

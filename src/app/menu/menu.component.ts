@@ -7,7 +7,7 @@ import { RouterLink } from "@angular/router";
 @Component({
     selector: 'spo-menu',
     templateUrl: 'menu.component.html',
-    styleUrl: 'menu.component.css',
+    styleUrl: 'menu.component.scss',
     standalone: true,
     imports: [CommonModule, RouterLink]
 })

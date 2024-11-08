@@ -1,50 +1,65 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { paginar } from "../../../../utils/dataUtils";
-import { CustomCurrencyPipe } from "../../../../utils/pipes/customCurrency.pipe";
 import { ObjetosService } from "../../../../utils/services/objetos.service";
 import { ObjetoFiltroComponent } from "./objetos-filtro/objetos-filtro.component";
-import { Router } from "@angular/router";
 import { ObjetoDTO } from "../../../../utils/models/ObjetoDTO";
 import { TiraObjetoComponent } from "../../../../utils/components/tira-objeto/tira-objeto.component";
+import { ObjetoFiltroDTO } from "../../../../utils/models/ObjetoFiltroDTO";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "spo-avaliacao",
     templateUrl: "./avaliacao.component.html",
-    styleUrl: "./avaliacao.component.css",
+    styleUrl: "./avaliacao.component.scss",
     standalone: true,
-    imports: [CommonModule, CustomCurrencyPipe, ReactiveFormsModule, ObjetoFiltroComponent, TiraObjetoComponent]
+    imports: [
+        CommonModule, ReactiveFormsModule, ObjetoFiltroComponent,
+        TiraObjetoComponent, FontAwesomeModule
+    ]
 })
-export class AvaliacaoComponent {
+export class AvaliacaoComponent implements AfterViewInit{
 
+    searchIcon = faMagnifyingGlass;
+
+    @ViewChild(ObjetoFiltroComponent) private filtroComponent : ObjetoFiltroComponent;
     txtBusca = new FormControl('');
 
     data : ObjetoDTO[][] = [];
 
+    filtro : ObjetoFiltroDTO;
+
     paginaAtual = 1;
 
+    qtObjetos = 0;
 
-    constructor(private service: ObjetosService, private router : Router) {
-        this.txtBusca.valueChanges.subscribe(value => {
-            this.carregarLista(value);
-        })
-
-        this.carregarLista(this.txtBusca.value);
+    constructor(private service: ObjetosService) {
+        
     }
 
-    carregarLista(filtro:string | null) {
-        this.service.getListaObjetos({nome: filtro}).subscribe((objs) => {
-                this.data = paginar(objs, 15);
-            });
+    ngAfterViewInit(): void {
+        this.txtBusca.valueChanges.subscribe(value => this.updateFiltro());
+        this.filtroComponent.form.valueChanges.subscribe(value => this.updateFiltro());
+        
     }
 
-    qtObjetos() : number{
-        let soma = 0;
+    updateFiltro(){
 
-        this.data.forEach(arr => soma += arr.length);
+        this.filtro = {
+            exercicio: this.filtroComponent.form.get("exercicio").value,
+            unidadeId: this.filtroComponent.form.get("unidadeOrcamentariaControl").value,
+            status: this.filtroComponent.form.get("statusControl").value,
+            nome: this.txtBusca.value
+        };
 
-        return soma
+        this.service.getListaObjetos(this.filtro).subscribe((objs) => {
+            this.data = paginar(objs, 15);
+
+            this.qtObjetos = objs.length;
+
+        });
     }
 
     voltaUmaPagina() {

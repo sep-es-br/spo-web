@@ -4,6 +4,7 @@ import { BreadCrumbComponent } from "./breadcrumb/breadcrumb.component";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { breadCrumbNames } from "./breadcrumb/breadCrumb-data";
 import { HomeComponent } from "../home/home.component";
+import { IProfile } from "../utils/interfaces/profile.interface";
 
 @Component({
     selector: 'spo-header',
@@ -14,17 +15,17 @@ import { HomeComponent } from "../home/home.component";
 })
 export class HeaderComponent implements OnInit {
 
-    @ViewChild('imgProfile') private profileImgDiv : ElementRef | undefined;
     @ViewChild('menuUser') private menuUserElem? : ElementRef;
 
     title = '';
     userName : string | undefined = 'Diego Gaede'
-    userEmail : string | undefined = 'diego.gaede@sep.es.gov.br'
     iniciais : string | undefined = 'DG';
 
     showMenuUser : boolean = false;
 
-    @Input() home : HomeComponent | undefined;
+    @Input() home : HomeComponent;
+
+    @Input() user : IProfile;
 
     constructor(private route : ActivatedRoute, private router : Router) {
         this.router.events.subscribe(event => {
@@ -61,28 +62,7 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if(this.home) {
-            this.userName = this.home.user?.name;
-            this.userEmail = this.home.user?.email;
-            this.iniciais = this.home.user?.name.split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
-        }
-
-
+        this.iniciais = this.user.name.split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
     }
 
-    loadProfileImage() {
-        if(!this.profileImgDiv) return;
-
-        let savedImage = undefined;
-
-        if(savedImage) {
-            // carregar imagem salva
-        } else {
-            const _imgProfileDiv : HTMLDivElement = this.profileImgDiv.nativeElement as HTMLDivElement;
-
-            _imgProfileDiv.textContent = "teste"
-
-        }
-
-    }
 }

@@ -1,34 +1,31 @@
 import { CommonModule } from "@angular/common";
-import { AfterViewInit, Component, ErrorHandler, OnInit, ViewChild } from "@angular/core";
-import { PrevistoCardComponent } from "./previsto-card/previsto-card.component";
-import { HomologadoCardComponent } from "./homologado-card/homologado-card.component";
-import { AutorizadoCardComponent } from "./autorizado-card/autorizado-card.component";
-import { DisponivelCardComponent } from "./disponivel-card/disponivel-card.component";
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { InvestimentoFiltroComponent } from "./investimento-filtro/investimento-filtro.component";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { InvestimentosService } from "../../../utils/services/investimentos.service";
-import { CustomCurrencyPipe } from "../../../utils/pipes/customCurrency.pipe";
-import { Router, RouterLink } from "@angular/router";
+import { RouterLink } from "@angular/router";
 import { paginar } from "../../../utils/dataUtils";
-import { ObjetosService } from "../../../utils/services/objetos.service";
 import { InvestimentoDTO } from "../../../utils/models/InvestimentoDTO";
-import { ShortStringPipe } from "../../../utils/pipes/shortString.pipe";
 import { TiraInvestimentoComponent } from "../../../utils/components/tira-investimento/tira-investimento.component";
 import { InvestimentoFiltroDTO } from "../../../utils/models/InvestimentoFiltroDTO";
-import { ObjetoFiltroDTO } from "../../../utils/models/ObjetoFiltroDTO";
-import { CustoService } from "../../../utils/services/custo.service";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { ValorCardComponent } from "../../../utils/components/valor-card/valor-card.component";
 
 @Component({
     selector: 'spo-investimentos',
     templateUrl: './investimentos.component.html',
     styleUrl: './investimentos.component.scss',
     standalone: true,
-    imports: [CommonModule, TiraInvestimentoComponent, RouterLink, CustomCurrencyPipe, ShortStringPipe, ReactiveFormsModule, PrevistoCardComponent, HomologadoCardComponent, AutorizadoCardComponent, DisponivelCardComponent, InvestimentoFiltroComponent]
+    imports: [
+        CommonModule, TiraInvestimentoComponent, RouterLink,
+        ReactiveFormsModule, InvestimentoFiltroComponent, 
+        FontAwesomeModule, ValorCardComponent
+    ]
 })
 export class InvestimentosComponent implements AfterViewInit {
 
-    CLASS_DISPLAYLISTA = "displayLista";
-    CLASS_DISPLAYGRADE = "displayGrade";
+    searchIcon = faMagnifyingGlass;
 
     @ViewChild(InvestimentoFiltroComponent) filtroComponent! : InvestimentoFiltroComponent;
 
@@ -47,8 +44,6 @@ export class InvestimentosComponent implements AfterViewInit {
 
     paginaAtual = 1;
 
-    selectedDisplay : string = this.CLASS_DISPLAYLISTA
-
     constructor( private service: InvestimentosService ) {
         
     }
@@ -60,10 +55,13 @@ export class InvestimentosComponent implements AfterViewInit {
     }
 
     updateFiltro(){
-        this.filtro.exercicio = this.filtroComponent.form.get("exercicio")?.value;
-        this.filtro.codPO = this.filtroComponent.form.get("planoOrcamentarioControl")?.value;
-        this.filtro.codUnidade = this.filtroComponent.form.get("unidadeOrcamentariaControl")?.value;
-        this.filtro.nome = this.txtBusca.value;
+
+        this.filtro = {
+            exercicio: this.filtroComponent.form.get("exercicio").value,
+            codPO: this.filtroComponent.form.get("planoOrcamentarioControl").value,
+            codUnidade: this.filtroComponent.form.get("unidadeOrcamentariaControl").value,
+            nome: this.txtBusca.value
+        }
 
         this.recarregarLista();
     }
@@ -77,27 +75,21 @@ export class InvestimentosComponent implements AfterViewInit {
 
         this.qtObjetos = 0;
 
-        this.service.getListaInvestimentos(this.filtro).subscribe({
-            next: (invs) => {
-                this.data = paginar(invs, 15);
-                this.qtInvestimento = invs.length;
+        this.service.getListaInvestimentos(this.filtro).subscribe(invs => {
+            this.data = paginar(invs, 15);
+            this.qtInvestimento = invs.length;
 
-                invs.forEach(inv => {
-                    this.totalPrevisto += inv.totalPrevisto;
-                    this.totalHomologado += inv.totalHomologado;
-                    this.totalAutorizado += inv.totalAutorizado;
-                    this.totalDisponivel += inv.totalDisponivel;
+            invs.forEach(inv => {
+                this.totalPrevisto += inv.totalPrevisto;
+                this.totalHomologado += inv.totalHomologado;
+                this.totalAutorizado += inv.totalAutorizado;
+                this.totalDisponivel += inv.totalDisponivel;
 
-                    this.qtObjetos += inv.objetos.length
-                })                
+                this.qtObjetos += inv.objetos.length
+            })                
 
-            },
-            error: (err) =>{
-                console.log(err.error.erros)
-            }
         });
        
-
     }
 
 

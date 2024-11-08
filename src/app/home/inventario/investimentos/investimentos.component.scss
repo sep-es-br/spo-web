@@ -21,10 +21,9 @@
             padding: 1rem;
             border-radius: 0.5rem;
             box-shadow: rgba(170, 170, 170, 0.35) 1px 1px 5px 0px;
-            // margin: 0.5rem;
             background-color: white;
             color: rgb(85, 85, 85);
-            font-family: "Open Sans", "Open Sans", sans-serif;
+            font-family: "Open Sans", sans-serif;
             font-weight: 600;
             font-size: 0.96rem;
         }
@@ -81,6 +80,11 @@
                 padding: 0.3rem;
                 border-radius: 0.3rem;
 
+                fa-icon {
+                    font-size: small;
+                    color: gray;
+                }
+
                 input {
                     margin-left: 0.5rem;
                     border: unset;
@@ -111,7 +115,7 @@
                 cursor: pointer;
             }
 
-            div.botaoAcao:nth-last-of-type(1) {
+            div.botaoAcao:last-of-type {
                 margin-right: 0;
             }
 
@@ -121,18 +125,19 @@
 
             div#objetos div {
                 position: absolute;
-                top: -0.3rem;
-                right: -0.3rem;
+                z-index: 5;
+                top: 5%;
+                left: 90%;
+                transform: translate(-50%, -50%) scale(0.8);
                 color: white;
                 background-color: red;
                 font-size: smaller;
-                border-radius: 1rem;
+                border-radius: 1.5rem;
+                width: 1.5rem;
+                height: 1.5rem;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 0.1rem;
-                padding-left: 0.3rem;
-                padding-right: 0.3rem;
             }
         }
     }
@@ -169,64 +174,9 @@
         }
     }
     
-    div.displayLista {
+    div#listaDados {
         
-        overflow-x: scroll;
-
-        > div {
-            background-color: white;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            border-left: 0.3rem solid var(--cor-primaria);
-            border-top-left-radius: 0.2rem;
-            border-bottom-left-radius: 0.2rem;
-            margin: 1rem;
-            margin-left: 0;
-            margin-right: 0;
-            height: 4rem;
-            font-family: "Open Sans", sans-serif;
-            font-size: small;
-
-            .listNone {
-                display: none;
-            }
-
-            > .col {
-                width: 10rem;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                div:nth-of-type(1){
-                    color: var(--cor-primaria);
-                    margin-bottom: 0.5rem;
-                }
-
-                div:nth-of-type(2){
-                    color: rgb(110, 116, 132);
-                }
-
-                
-            }
-
-            .name {
-                flex-grow: 1;
-            }
-            
-            .seta {
-                width: 1.5rem;
-            }
-
-            .opcoes {
-                color: rgb(79, 129, 189);
-                font-weight: bolder;
-                font-size: larger;
-                width: 4rem;
-                align-items: center;
-            }
-        }
+        overflow-x: auto;
 
     }
 

@@ -6,6 +6,6 @@ import { RouterModule, RouterOutlet } from "@angular/router";
     selector: 'spo-objetos',
     template: '<router-outlet></router-outlet>',
     standalone: true,
-    imports: [CommonModule, RouterModule, RouterOutlet]
+    imports: [CommonModule, RouterOutlet]
 })
 export class ObjetosComponent {}

@@ -5,10 +5,8 @@ import { environment } from "../../environments/environment";
 
 @Component({
     selector: "spo-em-construcao",
-    templateUrl: "./em-construcao.component.html",
-    styleUrl: "./em-construcao.component.css",
-    standalone: true,
-    imports: [CommonModule]
+    template: "<h1>Em Breve</h1>",
+    standalone: true
 })
 export class EmConstrucaoComponent {
 

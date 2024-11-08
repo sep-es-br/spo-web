@@ -18,17 +18,19 @@ import { UnidadeOrcamentariaService } from "../../../../utils/services/unidadeOr
 })
 export class InvestimentoFiltroComponent {
     
-    @Input('parent') parent! : InvestimentosComponent;
+    anos : string[];
+    planos : PlanoOrcamentarioDTO[];
+    unidades : UnidadeOrcamentariaDTO[];
 
-    anos! : string[];
-    planos! : PlanoOrcamentarioDTO[];
-    unidades! : UnidadeOrcamentariaDTO[]
-    form! : FormGroup;
+    form = new FormGroup({
+        unidadeOrcamentariaControl: new FormControl(null),
+        planoOrcamentarioControl: new FormControl(null),
+        exercicio: new FormControl(null)
+    });
 
     constructor(private infosService: InfosService,
                 private planoService: PlanoOrcamentarioService,
-                private unidadeService: UnidadeOrcamentariaService,
-            private router: Router
+                private unidadeService: UnidadeOrcamentariaService
     ) {
         this.infosService.getAllAnos().subscribe((anosList) => {
                 this.anos = anosList
@@ -47,15 +49,7 @@ export class InvestimentoFiltroComponent {
         this.unidadeService.getAllUnidadesOrcamentarias().subscribe((unidadeList) => {
                 this.unidades = unidadeList;
 
-            })
-
-
-        this.form = new FormGroup({
-            unidadeOrcamentariaControl: new FormControl(null),
-            planoOrcamentarioControl: new FormControl(null),
-            exercicio: new FormControl(null)
-        })
-
+            });
         
     }
 
